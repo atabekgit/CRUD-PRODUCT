@@ -1,31 +1,42 @@
 <div class="container">
-  <div class="row d-flex float-xl-end mt-5">
-    <div class="col-xl-12 col-sm-12">
+  <div class="row  float-xl-end">
+    <div class="col-xl-10">
       <form>
         <div class="form-group">
-          <label for="category">Category</label>
-          <input type="text" class="form-control" id="category"
-                name="category"
-          >
+          <label for="text">Category</label>
+          <input type="text" class="form-control" id="text" [(ngModel)]="categoryObj.text" name="text"
+                 placeholder="Category">
         </div>
-        <button type="submit" (click)="addCategory()" class="btn btn-primary mt-2">Save</button>
+        <button type="submit"
+                (click)="saveCategory()"
+                class="btn btn-primary float-end" routerLink="">Save
+        </button>
       </form>
+    </div>
+  </div>
+
+  <div class="float-xl-end" style="margin-top: 10rem" >
+    <div class="col-xl-3 col-sm-1">
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
+          <th scope="col">Category</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
+        <tr *ngFor="let cate of categoryList">
+          <th scope="row">{{cate.id}}</th>
+          <td>{{cate.text}}</td>
+          <!--
+                  <td><a class="btn btn-outline-danger" (click)="delete(product.id)">Delete</a></td>
+          -->
+
         </tr>
         </tbody>
       </table>
+
     </div>
   </div>
+
+
 </div>
-
-
