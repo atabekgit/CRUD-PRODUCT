@@ -8,9 +8,7 @@ import {Product} from "../../model/model";
 })
 export class ProductListComponent implements OnInit {
 
-
   productList!: Product[]
-
   constructor() {
     this.productList = []
   }
@@ -23,7 +21,6 @@ export class ProductListComponent implements OnInit {
   }
 
   delete(id:any) {
-    debugger;
     const oldRecord = localStorage.getItem('product-list')
     if (oldRecord !== null) {
       const productList = JSON.parse(oldRecord)
