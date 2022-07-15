@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {UpdateProductComponent} from './components/update-product/update-product.component';
 import {CategoryModule} from "./shared/category/category.module";
 import { CreateCategoryComponent } from './shared/create-category/create-category.component';
+import { MainLayoutCategoryComponent } from './shared/main-layout-category/main-layout-category.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CreateCategoryComponent } from './shared/create-category/create-categor
     CreateProductComponent,
     UpdateProductComponent,
     CreateCategoryComponent,
+    MainLayoutCategoryComponent,
   ],
   imports: [
     BrowserModule,

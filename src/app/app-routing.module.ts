@@ -13,9 +13,18 @@ const routes: Routes = [
         redirectTo: '/',
         pathMatch: 'full'
       },
-      {path: '', component: ProductListComponent},
-      {path: 'create', component: CreateProductComponent},
-      {path: 'update/:id', component: UpdateProductComponent},
+      {
+        path: '',
+        component: ProductListComponent
+      },
+      {
+        path: 'create',
+        component: CreateProductComponent
+      },
+      {
+        path: 'update/:id',
+        component: UpdateProductComponent
+      },
       {
         path: 'category',
         loadChildren: () => import('./shared/category/category.module').then(m => m.CategoryModule)

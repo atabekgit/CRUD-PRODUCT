@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center">
-  <div class="col-xl-8 col-sm-1">
+  <div class="col-xl-7 col-sm-1">
     <table class="table">
       <thead>
       <tr>
@@ -15,12 +15,12 @@
         <td>{{product.title}}</td>
         <td>{{product.price}}</td>
         <td>{{product.quantity}}</td>
-        <td><a href="#" class="btn btn-outline-success" [routerLink]="['/update',product.id]">Edit</a></td>
-        <td><a class="btn btn-outline-danger" (click)="delete(product.id)">Delete</a></td>
-
+        <td><a href="#" class="btn btn-outline-success" [routerLink]="['/update',product.id]"><span><i class="bi bi-pen-fill"></i>
+          </span></a></td>
+        <td><a class="btn btn-outline-danger" (click)="delete(product.id)"><span><i class="bi bi-trash"></i>
+          </span></a></td>
       </tr>
       </tbody>
     </table>
-
   </div>
 </div>

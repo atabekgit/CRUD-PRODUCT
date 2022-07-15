@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Product} from "../../model/model";
-import {LocalStorageService} from "../../services/local-storage.service";
+import {Component} from '@angular/core';
+import {Product} from "../../models/product.model";
+
 
 @Component({
   selector: 'app-create-product',
