@@ -1,22 +1,7 @@
-<div class="container">
-  <div class="row  float-xl-end">
-    <div class="col-xl-10">
-      <form>
-        <div class="form-group">
-          <label for="text">Category</label>
-          <input type="text" class="form-control" id="text" [(ngModel)]="categoryObj.text" name="text"
-                 placeholder="Category">
-        </div>
-        <button type="submit"
-                (click)="saveCategory()"
-                class="btn btn-primary float-end" routerLink="">Save
-        </button>
-      </form>
-    </div>
-  </div>
 
-  <div class="float-xl-end" style="margin-top: 10rem" >
-    <div class="col-xl-3 col-sm-1">
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <div class="col-xl-5 col-sm-1 me-5">
       <table class="table">
         <thead>
         <tr>
@@ -27,16 +12,12 @@
         <tr *ngFor="let cate of categoryList">
           <th scope="row">{{cate.id}}</th>
           <td>{{cate.text}}</td>
-          <!--
-                  <td><a class="btn btn-outline-danger" (click)="delete(product.id)">Delete</a></td>
-          -->
-
+          <td><a class="btn btn-outline-danger" (click)="delete(cate.id)"><span><i class="bi bi-trash"></i>
+          </span></a></td>
         </tr>
         </tbody>
       </table>
 
     </div>
   </div>
-
-
 </div>

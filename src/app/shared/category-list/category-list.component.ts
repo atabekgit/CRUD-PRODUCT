@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LocalStorageService} from "../../services/local-storage.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Category, Product} from "../../model/model";
+import {Category} from "../../models/category.model";
 
 @Component({
   selector: 'app-category-list',
@@ -10,9 +8,8 @@ import {Category, Product} from "../../model/model";
 })
 export class CategoryListComponent implements OnInit {
   categoryList!: Category[]
-  categoryObj!:Category
+
   constructor() {
-    this.categoryObj = new Category();
     this.categoryList = []
   }
 
@@ -23,28 +20,7 @@ export class CategoryListComponent implements OnInit {
     }
   }
 
-  getCategoryID() {
-    const oldRecords = localStorage.getItem('category-list')
-    if (oldRecords !== null) {
-      const productList = JSON.parse(oldRecords)
-      return productList.length + 1
-    } else {
-      return 1;
-    }
-  }
-  saveCategory(){
-    this.categoryObj.id = this.getCategoryID()
-    const oldRecords = localStorage.getItem('category-list')
-    if (oldRecords !== null) {
-      const productList = JSON.parse(oldRecords)
-      productList.push(this.categoryObj)
-      localStorage.setItem('category-list', JSON.stringify(productList))
-    } else {
-      const productArray = []
-      productArray.push(this.categoryObj)
-      localStorage.setItem('category-list', JSON.stringify(productArray))
-    }
-  }
+
   delete(id:any) {
     const oldRecord = localStorage.getItem('category-list')
     if (oldRecord !== null) {
