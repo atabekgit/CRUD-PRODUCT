@@ -3,6 +3,6 @@ export class Product {
   title?: string
   price?: number
   quantity?: number
-  category?:any
+  category?: any
 }
 

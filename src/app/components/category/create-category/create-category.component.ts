@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Category} from "../../models/category.model";
+import {Component, OnInit} from '@angular/core';
+import {Category} from "../../../models/category.model";
 
 @Component({
   selector: 'app-create-category',
@@ -7,13 +7,15 @@ import {Category} from "../../models/category.model";
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  categoryObj!:Category
+  categoryObj!: Category
+
   constructor() {
     this.categoryObj = new Category();
   }
 
   ngOnInit(): void {
   }
+
   getCategoryID() {
     const oldRecords = localStorage.getItem('category-list')
     if (oldRecords !== null) {
@@ -24,7 +26,7 @@ export class CreateCategoryComponent implements OnInit {
     }
   }
 
-  saveCategory(){
+  saveCategory() {
     this.categoryObj.id = this.getCategoryID()
     const oldRecords = localStorage.getItem('category-list')
     if (oldRecords !== null) {

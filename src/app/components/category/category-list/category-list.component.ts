@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from "../../models/category.model";
+import {Category} from "../../../models/category.model";
 
 @Component({
   selector: 'app-category-list',
@@ -21,7 +21,7 @@ export class CategoryListComponent implements OnInit {
   }
 
 
-  delete(id:any) {
+  delete(id: any) {
     const oldRecord = localStorage.getItem('category-list')
     if (oldRecord !== null) {
       const productList = JSON.parse(oldRecord)

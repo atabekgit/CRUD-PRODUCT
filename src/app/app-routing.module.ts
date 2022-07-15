@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from "./components/main-layout/main-layout.component";
-import {ProductListComponent} from "./components/product-list/product-list.component";
-import {CreateProductComponent} from "./components/create-product/create-product.component";
-import {UpdateProductComponent} from "./components/update-product/update-product.component";
+import {ProductListComponent} from "./components/product/product-list/product-list.component";
+import {CreateProductComponent} from "./components/product/create-product/create-product.component";
+import {UpdateProductComponent} from "./components/product/update-product/update-product.component";
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'category',
-        loadChildren: () => import('./shared/category/category.module').then(m => m.CategoryModule)
+        loadChildren: () => import('./module/category/category.module').then(m => m.CategoryModule)
       }
     ]
   }

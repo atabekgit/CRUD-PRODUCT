@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../../models/product.model";
+import {Product} from "../../../models/product.model";
 
 @Component({
   selector: 'app-product-list',
@@ -9,6 +9,7 @@ import {Product} from "../../models/product.model";
 export class ProductListComponent implements OnInit {
 
   productList!: Product[]
+
   constructor() {
     this.productList = []
   }
@@ -20,7 +21,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  delete(id:any) {
+  delete(id: any) {
     const oldRecord = localStorage.getItem('product-list')
     if (oldRecord !== null) {
       const productList = JSON.parse(oldRecord)

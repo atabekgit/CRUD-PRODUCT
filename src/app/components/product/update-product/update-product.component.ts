@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "../../models/product.model";
-import {Category} from "../../models/category.model";
+import {Product} from "../../../models/product.model";
+import {Category} from "../../../models/category.model";
 
 @Component({
   selector: 'app-update-product',
@@ -13,7 +13,7 @@ export class UpdateProductComponent implements OnInit {
   productObj: Product
   categoryList!: Category[]
 
-  constructor(private route: ActivatedRoute,private router:Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.productObj = new Product()
     this.categoryList = []
     console.log(this.categoryList)
@@ -36,12 +36,14 @@ export class UpdateProductComponent implements OnInit {
       }
     }
   }
-  categoryListSelect(){
+
+  categoryListSelect() {
     const records = localStorage.getItem('category-list')
     if (records !== null) {
       this.categoryList = JSON.parse(records);
     }
   }
+
   updateProduct() {
     const oldRecord = localStorage.getItem('product-list')
     if (oldRecord !== null) {

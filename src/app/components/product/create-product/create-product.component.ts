@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../../models/product.model";
-import {Category} from "../../models/category.model";
+import {Product} from "../../../models/product.model";
+import {Category} from "../../../models/category.model";
 
 
 @Component({
@@ -8,7 +8,7 @@ import {Category} from "../../models/category.model";
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss']
 })
-export class CreateProductComponent  implements OnInit{
+export class CreateProductComponent implements OnInit {
 
   click: boolean = true
   productObj!: Product
@@ -18,12 +18,14 @@ export class CreateProductComponent  implements OnInit{
     this.productObj = new Product();
     this.categoryList = []
   }
+
   ngOnInit(): void {
     const records = localStorage.getItem('category-list')
     if (records !== null) {
       this.categoryList = JSON.parse(records);
     }
   }
+
   getProductID() {
     const oldRecords = localStorage.getItem('product-list')
     if (oldRecords !== null) {
@@ -33,6 +35,7 @@ export class CreateProductComponent  implements OnInit{
       return 1;
     }
   }
+
   saveProduct() {
     this.click = !this.click;
     this.productObj.id = this.getProductID()
@@ -47,6 +50,7 @@ export class CreateProductComponent  implements OnInit{
       localStorage.setItem('product-list', JSON.stringify(productArray))
     }
   }
+
   onKey($event: KeyboardEvent) {
     this.click = ($event.target as HTMLInputElement).value === '' ? true : false;
   }
