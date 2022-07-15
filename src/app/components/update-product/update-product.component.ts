@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Product} from "../../models/product.model";
+import {Category} from "../../models/category.model";
 
 @Component({
   selector: 'app-update-product',
@@ -10,15 +11,19 @@ import {Product} from "../../models/product.model";
 export class UpdateProductComponent implements OnInit {
 
   productObj: Product
+  categoryList!: Category[]
 
   constructor(private route: ActivatedRoute,private router:Router) {
     this.productObj = new Product()
+    this.categoryList = []
+    console.log(this.categoryList)
     this.route.params.subscribe((res) => {
       this.productObj.id = res['id']
     })
   }
 
   ngOnInit(): void {
+    this.categoryListSelect()
     const oldRecords = localStorage.getItem("product-list")
     if (oldRecords !== null) {
       const productList = JSON.parse(oldRecords)
@@ -27,11 +32,17 @@ export class UpdateProductComponent implements OnInit {
         this.productObj.title = currentProduct.title
         this.productObj.price = currentProduct.price
         this.productObj.quantity = currentProduct.quantity
+        this.productObj.category = currentProduct.category
       }
     }
   }
+  categoryListSelect(){
+    const records = localStorage.getItem('category-list')
+    if (records !== null) {
+      this.categoryList = JSON.parse(records);
+    }
+  }
   updateProduct() {
-    debugger;
     const oldRecord = localStorage.getItem('product-list')
     if (oldRecord !== null) {
       const productList = JSON.parse(oldRecord)
