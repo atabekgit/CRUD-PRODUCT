@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../models/category.model";
+import {CategoryService} from "../../../service/category.service";
 
 @Component({
   selector: 'app-category-list',
@@ -7,30 +8,23 @@ import {Category} from "../../../models/category.model";
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnInit {
-  categoryList!: Category[]
+  categoryList: Category[] = []
 
-  constructor() {
-    this.categoryList = []
+  constructor(private categoryService: CategoryService) {
+
   }
 
   ngOnInit(): void {
-    const records = localStorage.getItem('category-list')
-    if (records !== null) {
-      this.categoryList = JSON.parse(records);
-    }
+    this.categoryList = this.getCategoryList()
+  }
+
+  getCategoryList(): Category[] {
+    return JSON.parse(localStorage.getItem('category-list') || '[]');
   }
 
 
-  delete(id: any) {
-    const oldRecord = localStorage.getItem('category-list')
-    if (oldRecord !== null) {
-      const productList = JSON.parse(oldRecord)
-      productList.splice(productList.findIndex((a: any) => a.id == id), 1);
-      localStorage.setItem('category-list', JSON.stringify(productList))
-    }
-    const records = localStorage.getItem('category-list')
-    if (records !== null) {
-      this.categoryList = JSON.parse(records);
-    }
+  deleteCategory(id: any):void {
+    this.categoryService.deleteCategory(id)
+    this.categoryList = this.getCategoryList();
   }
 }

@@ -11,7 +11,7 @@
         <tr *ngFor="let cate of categoryList">
           <th scope="row">{{cate.id}}</th>
           <td>{{cate.text}}</td>
-          <td><a class="btn btn-outline-danger" (click)="delete(cate.id)"><span><i class="bi bi-trash"></i>
+          <td><a class="btn btn-outline-danger" (click)="deleteCategory(cate.id)"><span><i class="bi bi-trash"></i>
           </span></a></td>
         </tr>
         </tbody>

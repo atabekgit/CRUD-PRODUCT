@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../models/product.model";
+import {ProductService} from "../../../service/product.service";
 
 @Component({
   selector: 'app-product-list',
@@ -8,29 +9,20 @@ import {Product} from "../../../models/product.model";
 })
 export class ProductListComponent implements OnInit {
 
-  productList!: Product[]
-
-  constructor() {
-    this.productList = []
-  }
-
+  productList: Product[] = []
+ constructor(private productService:ProductService) {
+ }
   ngOnInit(): void {
-    const records = localStorage.getItem('product-list')
-    if (records !== null) {
-      this.productList = JSON.parse(records);
-    }
+    this.productList = this.getProductList()
   }
 
-  delete(id: any) {
-    const oldRecord = localStorage.getItem('product-list')
-    if (oldRecord !== null) {
-      const productList = JSON.parse(oldRecord)
-      productList.splice(productList.findIndex((a: any) => a.id == id), 1);
-      localStorage.setItem('product-list', JSON.stringify(productList))
-    }
-    const records = localStorage.getItem('product-list')
-    if (records !== null) {
-      this.productList = JSON.parse(records);
-    }
+  getProductList(): Product[] {
+    return JSON.parse(localStorage.getItem('product-list') || '[]');
   }
+
+   deleteProduct(id:any){
+    this.productService.deleteProduct(id)
+     this.productList = this.getProductList();
+
+   }
 }

@@ -4,11 +4,11 @@
       <form>
         <div class="form-group">
           <label for="text">Category</label>
-          <input type="text" class="form-control mt-2" id="text" [(ngModel)]="categoryObj.text" name="text"
+          <input type="text" class="form-control mt-2" id="text" [(ngModel)]="category.text" name="text"
                  placeholder="Category">
         </div>
         <button type="submit"
-                (click)="saveCategory()"
+                (click)="createCategory()"
                 class="btn btn-primary float-end mt-3" routerLink="/category">Save
         </button>
       </form>
