@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Product} from "../../../models/product.model";
 import {Category} from "../../../models/category.model";
+import {ProductService} from "../../../service/product.service";
 
 @Component({
   selector: 'app-update-product',
@@ -10,48 +11,35 @@ import {Category} from "../../../models/category.model";
 })
 export class UpdateProductComponent implements OnInit {
 
-  productObj: Product
-  categoryList!: Category[]
+  productObj: Product = new Product();
+  categoryList: Category[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.productObj = new Product()
-    this.categoryList = []
-    console.log(this.categoryList)
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((res) => {
       this.productObj.id = res['id']
     })
   }
 
   ngOnInit(): void {
-    this.categoryListSelect()
-    const oldRecords = localStorage.getItem("product-list")
-    if (oldRecords !== null) {
-      const productList = JSON.parse(oldRecords)
-      const currentProduct = productList.find((val: any) => val.id == this.productObj.id)
-      if (currentProduct !== undefined) {
-        this.productObj.title = currentProduct.title
-        this.productObj.price = currentProduct.price
-        this.productObj.quantity = currentProduct.quantity
-        this.productObj.category = currentProduct.category
-      }
-    }
+    this.productListUpdate()
+    this.viewProduct()
   }
 
-  categoryListSelect() {
-    const records = localStorage.getItem('category-list')
-    if (records !== null) {
-      this.categoryList = JSON.parse(records);
-    }
+  viewProduct() {
+    const currentProduct = this.productListUpdate().find((val: any) => val.id == this.productObj.id)
+    this.productObj.title = currentProduct.title
+    this.productObj.price = currentProduct.price
+    this.productObj.quantity = currentProduct.quantity
+    this.productObj.category = currentProduct.category
+  }
+
+
+  productListUpdate() {
+    return JSON.parse(localStorage.getItem('product-list') || "[]")
   }
 
   updateProduct() {
-    const oldRecord = localStorage.getItem('product-list')
-    if (oldRecord !== null) {
-      const productList = JSON.parse(oldRecord)
-      productList.splice(productList.findIndex((a: any) => a.id == this.productObj.id), 1);
-      productList.unshift(this.productObj)
-      localStorage.setItem('product-list', JSON.stringify(productList))
-    }
+    this.productService.updateProduct(this.productObj)
     this.router.navigate([''])
   }
 }

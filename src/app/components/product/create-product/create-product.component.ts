@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../models/product.model";
 import {Category} from "../../../models/category.model";
+import {ProductService} from "../../../service/product.service";
 
 
 @Component({
@@ -11,49 +12,22 @@ import {Category} from "../../../models/category.model";
 export class CreateProductComponent implements OnInit {
 
   click: boolean = true
-  productObj!: Product
-  categoryList!: Category[]
+  product: Product = new Product();
+  categoryList: Category[] = []
 
-  constructor() {
-    this.productObj = new Product();
-    this.categoryList = []
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
-    const records = localStorage.getItem('category-list')
-    if (records !== null) {
-      this.categoryList = JSON.parse(records);
-    }
-  }
-
-  getProductID() {
-    const oldRecords = localStorage.getItem('product-list')
-    if (oldRecords !== null) {
-      const productList = JSON.parse(oldRecords)
-      return productList.length + 1
-    } else {
-      return 1;
-    }
+    this.categoryList = JSON.parse(localStorage.getItem('category-list') || '[]')
   }
 
   saveProduct() {
     this.click = !this.click;
-    this.productObj.id = this.getProductID()
-    const oldRecords = localStorage.getItem('product-list')
-    if (oldRecords !== null) {
-      const productList = JSON.parse(oldRecords)
-      productList.push(this.productObj)
-      localStorage.setItem('product-list', JSON.stringify(productList))
-    } else {
-      const productArray = []
-      productArray.push(this.productObj)
-      localStorage.setItem('product-list', JSON.stringify(productArray))
-    }
+    this.productService.createProduct(this.product);
   }
 
   onKey($event: KeyboardEvent) {
-    this.click = ($event.target as HTMLInputElement).value === '' ? true : false;
+    this.click = ($event.target as HTMLInputElement).value === '';
   }
-
-
 }
